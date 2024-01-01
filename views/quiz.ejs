@@ -1,0 +1,30 @@
+<!-- views/quiz.ejs -->
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1 class="display-4"><%= quiz.topic %></h1>
+    <p class="lead">Answer the following questions:</p>
+</div>
+
+<form action="/quiz/<%= quiz._id %>/submit" method="post">
+    <% for (let i = 0; i < quiz.questions.length; i++) { %>
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title"><%= quiz.questions[i].question %></h5>
+                <% for (let j = 0; j < quiz.questions[i].choices.length; j++) { %>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="<%= i %>" id="<%= i %>-<%= j %>" value="<%= quiz.questions[i].choices[j] %>" required>
+                        <label class="form-check-label" for="<%= i %>-<%= j %>">
+                            <%= quiz.questions[i].choices[j] %>
+                        </label>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+
+    <button type="submit" class="btn btn-primary">Submit Answers</button>
+</form>
+
+<a href="/" class="btn btn-secondary mt-3">Go back</a>

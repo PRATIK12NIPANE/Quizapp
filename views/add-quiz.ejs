@@ -1,0 +1,67 @@
+<!-- views/add-quiz.ejs -->
+
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Add New Quiz</h2>
+    <% if (error) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <form method="post" action="/admin/add" class="mb-4">
+        <div class="form-group">
+            <label for="topic">Quiz Topic:</label>
+            <input type="text" class="form-control" id="topic" name="topic" required>
+        </div>
+
+        <div id="questions-section">
+            <div class="question-group mb-4">
+                <label for="question">Question:</label>
+                <input type="text" class="form-control" name="questions[0][question]" required>
+                <div class="form-group choices-group mt-2">
+                    <label for="choices">Choices:</label>
+                    <input type="text" class="form-control" name="questions[0][choices][]" placeholder="Choice 1" required>
+                    <input type="text" class="form-control mt-2" name="questions[0][choices][]" placeholder="Choice 2" required>
+                    <input type="text" class="form-control mt-2" name="questions[0][choices][]" placeholder="Choice 3" required>
+                    <input type="text" class="form-control mt-2" name="questions[0][choices][]" placeholder="Choice 4" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer">Correct Answer:</label>
+                    <input type="text" class="form-control" name="questions[0][answer]" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success" onclick="addQuestion()">Add Another Question</button>
+        <button type="submit" class="btn btn-primary">Add Quiz</button>
+    </form>
+    <a href="/admin" class="btn btn-secondary">Go back</a>
+</div>
+
+<script>
+    function addQuestion() {
+        const questionsSection = document.getElementById('questions-section');
+        const questionGroup = document.createElement('div');
+        questionGroup.classList.add('question-group', 'mb-4');
+
+        questionGroup.innerHTML = `
+            <label for="question">Question:</label>
+            <input type="text" class="form-control" name="questions[${document.querySelectorAll('.question-group').length}][question]" required>
+            <div class="form-group choices-group mt-2">
+                <label for="choices">Choices:</label>
+                <input type="text" class="form-control" name="questions[${document.querySelectorAll('.question-group').length}][choices][]" placeholder="Choice 1" required>
+                <input type="text" class="form-control mt-2" name="questions[${document.querySelectorAll('.question-group').length}][choices][]" placeholder="Choice 2" required>
+                <input type="text" class="form-control mt-2" name="questions[${document.querySelectorAll('.question-group').length}][choices][]" placeholder="Choice 3" required>
+                <input type="text" class="form-control mt-2" name="questions[${document.querySelectorAll('.question-group').length}][choices][]" placeholder="Choice 4" required>
+            </div>
+            <div class="form-group">
+                <label for="answer">Correct Answer:</label>
+                <input type="text" class="form-control" name="questions[${document.querySelectorAll('.question-group').length}][answer]" required>
+        `;
+
+        questionsSection.appendChild(questionGroup);
+    }
+</script>
+
+<%- include('partials/footer') %>

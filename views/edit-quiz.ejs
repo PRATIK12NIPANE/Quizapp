@@ -1,0 +1,27 @@
+<!-- views/edit-quiz.ejs -->
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1 class="display-4">Edit Quiz</h1>
+    <p class="lead">Edit the details of the quiz.</p>
+</div>
+
+<form action="/admin/edit/<%= quiz._id %>" method="post">
+    <div class="form-group">
+        <label for="topic">Topic:</label>
+        <input type="text" class="form-control" id="topic" name="topic" value="<%= quiz.topic %>" required>
+    </div>
+    <div class="form-group">
+        <label for="questions">Questions (comma-separated):</label>
+        <input type="text" class="form-control" id="questions" name="questions" value="<%= quiz.questions.map(q => q.question).join(', ') %>" required>
+    </div>
+    <div class="form-group">
+        <label for="choices">Choices (comma-separated):</label>
+        <input type="text" class="form-control" id="choices" name="choices" value="<%= quiz.questions.map(q => q.choices.join(', ')).join(', ') %>" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Quiz</button>
+</form>
+
+<a href="/admin" class="btn btn-secondary mt-3">Go back</a>

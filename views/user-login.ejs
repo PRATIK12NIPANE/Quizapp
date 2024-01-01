@@ -1,0 +1,22 @@
+<!-- views/user-login.ejs -->
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1 class="display-4">User Login</h1>
+    <p class="lead">Enter your user credentials.</p>
+</div>
+
+<form action="/user/login" method="post">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<% if (error) { %>
+    <div class="alert alert-danger mt-3" role="alert">
+        <%= error %>
+    </div>
+<% } %>

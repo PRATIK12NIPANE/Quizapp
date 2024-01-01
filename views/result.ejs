@@ -1,0 +1,11 @@
+<!-- views/result.ejs -->
+
+<%- include('partials/header') %>
+
+<div class="jumbotron">
+    <h1 class="display-4">Quiz Result</h1>
+    <p class="lead">You scored <%= score %> out of <%= totalQuestions %>!</p>
+</div>
+
+<a href="/" class="btn btn-primary">Take Another Quiz</a>
+<a href="/logout" class="btn btn-danger">Logout</a>
